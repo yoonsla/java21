@@ -1,19 +1,25 @@
 package com.example.java21.collections;
 
 import java.util.SequencedCollection;
-import lombok.extern.log4j.Log4j2;
+import java.util.SequencedMap;
+import java.util.SequencedSet;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@Log4j2
+@Slf4j
 class SequencedCollectionsTest {
 
     SequencedCollectionsImpl sequencedCollections;
+    SequencedSetImpl sequencedSet;
+    SequencedMapImpl sequencedMap;
 
     @BeforeEach
     void init() {
         sequencedCollections = new FakeSequencedCollectionsImpl();
+        sequencedSet = new FakeSequencedSetImpl();
+        sequencedMap = new FakeSequencedMapImpl();
     }
 
     @Test
@@ -61,5 +67,33 @@ class SequencedCollectionsTest {
     void removeLast() {
         Object number = sequencedCollections.removeLast();
         log.info("remove last ==> {}", number);
+    }
+
+    @Test
+    @DisplayName("set을 reverse 한다.")
+    void reversedSet() {
+        SequencedSet reversed = sequencedSet.reversed();
+        log.info("reversed set ==> {}", reversed);
+    }
+
+    @Test
+    @DisplayName("map을 reverse 한다.")
+    void reversedMap() {
+        SequencedMap reversed = sequencedMap.reversed();
+        log.info("reversed map ==> {}", reversed);
+    }
+
+    @Test
+    @DisplayName("map을 맨 앞에 put 한다.")
+    void putFirst() {
+        Object map = sequencedMap.putFirst("sangyoon0", "hi0");
+        log.info("putFirst map ==> {}", map);
+    }
+
+    @Test
+    @DisplayName("map을 맨 뒤에 put 한다.")
+    void putLast() {
+        Object map = sequencedMap.putLast("sangyoon4", "hi4");
+        log.info("putLast map ==> {}", map);
     }
 }
